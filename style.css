@@ -157,6 +157,11 @@ nav {
     position: relative;
     overflow: hidden;
 }
+#resumo {
+    display: flex;
+    align-items: center;
+    min-height: 80vh; /* Altura mínima da viewport */
+}
 
 
 /* Responsividade - para telas menores */
