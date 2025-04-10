@@ -164,6 +164,373 @@ nav {
 }
 
 
+/* Estilo da seção de serviços */
+.serviços {
+    background-color: #121212;
+    padding: 6rem 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.serviços::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 70% 30%, rgba(249, 80, 4, 0.1) 0%, transparent 40%),
+        linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+    z-index: 0;
+}
+
+.serviços h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+    color: white;
+}
+
+.serviços h2 span {
+    color: #f95004;
+}
+
+/* Container dos serviços */
+.serviços-conteiner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Cards de serviços */
+.serviços-box {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 250px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+    border: 1px solid rgba(249, 80, 4, 0.3);
+}
+
+.serviços-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(249, 80, 4, 0.3);
+    border-color: #f95004;
+}
+
+.serviços-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.serviços-box:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.6) contrast(1.2);
+}
+
+/* Camada de overlay */
+.serviços-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(249, 80, 4, 0.8), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.serviços-box:hover .serviços-layer {
+    opacity: 1;
+}
+
+.serviços-layer h4 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.serviços-layer p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.serviços-layer a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.serviços-layer a:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+.serviços-layer a i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.serviços-layer a:hover i {
+    color: #121212;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .serviços {
+        padding: 4rem 1.5rem;
+    }
+    
+    .serviços h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .serviços-conteiner {
+        grid-template-columns: 1fr;
+    }
+    
+    .serviços-box {
+        height: 200px;
+    }
+}
+
+/* Efeito de brilho nos cards */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(249, 80, 4, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(249, 80, 4, 0.5); }
+    100% { box-shadow: 0 0 10px rgba(249, 80, 4, 0.3); }
+}
+
+.serviços-box {
+    animation: glow 4s infinite ease-in-out;
+}
+
+
+/* Estilo da seção de contato */
+.contato {
+    background-color: #121212;
+    padding: 6rem 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+.contato::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 70%, rgba(249, 80, 4, 0.1) 0%, transparent 40%);
+    z-index: 0;
+}
+
+.contato h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+    color: white;
+}
+
+.contato h2 span {
+    color: #f95004;
+}
+
+/* Container principal */
+.contato-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Caixa de informações */
+.contato-info {
+    background: rgba(30, 30, 30, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(249, 80, 4, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.info-box {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.info-box i {
+    font-size: 1.5rem;
+    color: #f95004;
+    margin-right: 1rem;
+    margin-top: 0.3rem;
+}
+
+.info-text h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #f95004;
+}
+
+.info-text p {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.horario .dia {
+    margin-bottom: 0.5rem;
+    color: #ccc;
+}
+
+.horario .dia span {
+    color: white;
+    font-weight: 600;
+    display: inline-block;
+    width: 120px;
+}
+
+.aberto {
+    color: #4CAF50 !important;
+    font-weight: bold;
+}
+
+/* Mapa */
+.contato-mapa {
+    height: 100%;
+    min-height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Formulário */
+.contato-form {
+    background: rgba(30, 30, 30, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(249, 80, 4, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.input-duplo {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.input-box input,
+.input-box textarea {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid rgba(249, 80, 4, 0.5);
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-box textarea {
+    height: 120px;
+    resize: none;
+}
+
+.input-box label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #999;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label,
+.input-box textarea:focus ~ label,
+.input-box textarea:valid ~ label {
+    top: -20px;
+    left: 0;
+    font-size: 0.8rem;
+    color: #f95004;
+}
+
+.input-box input:focus,
+.input-box textarea:focus {
+    border-color: #f95004;
+    outline: none;
+    box-shadow: 0 0 10px rgba(249, 80, 4, 0.3);
+}
+
+.btn {
+    background: #f95004;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #e04800;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(249, 80, 4, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .contato {
+        padding: 4rem 1.5rem;
+    }
+    
+    .contato h2 {
+        font-size: 2.2rem;
+    }
+    
+    .input-duplo {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .contato-mapa {
+        min-height: 250px;
+    }
+}
+
 /* Responsividade - para telas menores */
 @media (max-width: 768px) {
     #resumo {
