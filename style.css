@@ -24,7 +24,7 @@ nav {
 /* Estilo Base */
 #logo img {
     height: auto;
-    width: 150px;
+    width: 200px;
     transition: transform 0.3s ease;
 }
 
@@ -714,7 +714,7 @@ nav {
 
 /* Logo no Footer */
 .footer-logo img {
-    width: 150px;
+    width: 200px;
     height: auto;
     transition: transform 0.3s ease;
 }
