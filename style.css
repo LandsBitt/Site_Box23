@@ -1,7 +1,6 @@
 /* Reset básico */
 * {
     margin: 0;
-    color: white;
     padding: 0;
     box-sizing: border-box;
   }
@@ -20,24 +19,151 @@ nav {
     position: sticky; /* Fixa no topo ao rolar */
     height: 90px;
     top: 0;
-    overflow: hidden;
     z-index: 1000; /* Garante que fique acima de outros elementos */
 }
-
-/* Estilo do container do logo */
-#logo {
-    transition: transform 0.3s ease; /* Animação suave no hover */
-}
-
-#logo:hover {
-    transform: scale(1.05); /* Efeito de zoom sutil no hover */
-}
-
-/* Estilo da imagem do logo */
+/* Estilo Base */
 #logo img {
-    height: auto; /* Altura fixa */
-    width: 150px; /* Largura proporcional */
+    height: auto;
+    width: 150px;
+    transition: transform 0.3s ease;
 }
+
+#logo:hover img {
+    transform: scale(1.05);
+}
+
+/* Menu Desktop */
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #f95004;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #f95004;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Menu Hamburguer */
+.menu-hamburguer {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+}
+
+/* Menu Mobile */
+.mobile-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 50%;
+    height: 100vh;
+    background-color: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.5s ease;
+    z-index: 1000;
+    padding: 2rem; /* Adicionando padding para melhor espaçamento */
+}
+
+.mobile-links.active {
+    right: 0;
+}
+
+.mobile-links ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.mobile-links li {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.mobile-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 1rem;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.mobile-links a:hover {
+    color: #f95004;
+}
+
+/* Animação Hamburguer */
+.change .bar1 {
+    transform: translate(0, 9px) rotate(-45deg);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: translate(0, -9px) rotate(45deg);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .menu-hamburguer {
+        display: block;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
+
+
 
 /* Container dos links de navegação */
 #links {
@@ -161,6 +287,9 @@ nav {
     display: flex;
     align-items: center;
     min-height: 80vh; /* Altura mínima da viewport */
+}
+#resumo h1 span {
+    color: #f95004;
 }
 
 
@@ -511,6 +640,7 @@ nav {
     box-shadow: 0 10px 20px rgba(249, 80, 4, 0.3);
 }
 
+
 /* Responsividade */
 @media (max-width: 768px) {
     .contato {
@@ -549,10 +679,7 @@ nav {
         margin-right: auto;
     }
 
-    nav {
-        flex-direction: column; /* Empilha logo e links */
-        padding: 1rem;
-    }
+    
     
     #links {
         margin-top: 1rem;
@@ -563,10 +690,17 @@ nav {
         gap: 1rem;
         align-items: center;
     }
+   
+        
 }
+ 
   
-  /* Exemplo de fundo pra ver a nav melhor (opcional) */
+
 body {
     background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
     font-family: Arial, sans-serif;
+    color: white;
+}
+body.menu-open {
+    overflow: hidden; /* trava o scroll quando o menu tá aberto */
 }

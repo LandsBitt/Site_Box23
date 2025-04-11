@@ -17,37 +17,44 @@
     <nav>
         <div id="logo">
             <a href="index.html">
-                <img src="imagens/Logo.png">
+                <img src="imagens/Logo.png" alt="Box23 Logo">
             </a>
         </div>
-        <div id="links">
+        
+        <!-- Menu Desktop -->
+        <div class="nav-links" id="desktopLinks">
             <ul>
-                <li><a href="#resumo">empresa</a></li>
-                <li><a href="#serviços">serviços</a></li>
+                <li><a href="#resumo">Empresa</a></li>
+                <li><a href="#serviços">Serviços</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
-
         </div>
-        <div class="nav-responsive">
-            <li><a href="#resumo">empresa</a></li>
-            <li><a href="#serviços">serviços</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </div>
+        
+        <!-- Menu Mobile -->
         <div class="menu-hamburguer">
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
         </div>
+        
+        <!-- Menu Mobile (Overlay) -->
+        <div class="mobile-links" id="mobileLinks">
+            <ul>
+                <li><a href="#resumo">Empresa</a></li>
+                <li><a href="#serviços">Serviços</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
     </nav>
     
     <section id="resumo">
         <div id="H1">
-            <H1>Cuidamos do seu carro com dedicação, entregando resultados precisos e serviço ágil.</H1>
+            <H1>Cuidamos do seu carro com <span>dedicação</span>, entregando resultados <span>precisos</span> e serviço ágil.</H1>
         </div>
         
     </section>
     <section class="serviços" id="serviços">
-        <h2>Últimos <span>Projetos</span></h2>
+        <h2>Nossos <span>Serviços</span></h2>
         <div class="serviços-conteiner">
             <div class="serviços-box">
                 <img src="imagens/scanner.jpg" alt="serviços 1">
@@ -218,14 +225,40 @@
 
 <script>
     if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-            if (!user) {
-                window.netlifyIdentity.on("login", () => {
-                    document.location.href = "/admin/";
-                });
-            }
+    window.netlifyIdentity.on("init", user => {
+        if (!user) {
+            window.netlifyIdentity.on("login", () => {
+                document.location.href = "/admin/";
+            });
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.menu-hamburguer');
+    const mobileMenu = document.querySelector('.mobile-links');
+    const body = document.body;
+    
+    hamburger.addEventListener('click', function() {
+        // Alternar menu mobile
+        mobileMenu.classList.toggle('active');
+        
+        // Animação do hamburger
+        this.classList.toggle('change');
+        
+        // Bloquear scroll quando menu aberto
+        body.classList.toggle('menu-open');
+    });
+    
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.mobile-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            hamburger.classList.remove('change');
+            body.classList.remove('menu-open');
         });
-    }
+    });
+});
 </script>
 
 </body>
