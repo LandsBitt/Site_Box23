@@ -189,35 +189,32 @@
         
         <!-- Formulário de Contato -->
         <div class="contato-form">
-            <form name="contato-box23" method="POST" netlify>
+            <form id="contact-form">
                 <div class="input-duplo">
-                    <div class="input-box">
-                        <input type="text" name="nome" required>
-                        <label>Nome Completo</label>
-                    </div>
-                    <div class="input-box">
-                        <input type="email" name="email" required>
-                        <label>E-mail</label>
-                    </div>
+                  <div class="input-box">
+                    <input type="text" name="name" required>
+                    <label>Nome Completo</label>
+                  </div>
+                  <div class="input-box">
+                    <input type="email" name="email" required>
+                    <label>E-mail</label>
+                  </div>
                 </div>
-                
+              
                 <div class="input-box">
-                    <input type="tel" name="telefone" required>
-                    <label>Telefone</label>
+                  <input type="tel" name="phone" required>
+                  <label>Telefone</label>
                 </div>
-                
-                
+              
                 <div class="input-box">
-                    <textarea name="mensagem" required placeholder="Descreva brevemente o serviço necessário"></textarea>
-                    <label></label>
+                  <textarea name="message" required placeholder="Descreva brevemente o serviço necessário"></textarea>
+                  <label></label>
                 </div>
-                
-                <div class="input-box" netlify-recaptcha></div>
-                
+              
                 <button type="submit" class="btn">
-                    <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                  <i class="fas fa-paper-plane"></i> Enviar Mensagem
                 </button>
-            </form>
+              </form>
         </div>
     </div>
 </section>
@@ -262,15 +259,32 @@
 
 
 <script>
-    if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-        if (!user) {
-            window.netlifyIdentity.on("login", () => {
-                document.location.href = "/admin/";
-            });
-        }
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+  
+      const name = e.target.name.value;
+      const email = e.target.email.value;
+      const phone = e.target.phone.value || "Não informado";
+      const message = e.target.message.value;
+  
+      const subject = "Mensagem do formulário do site";
+  
+      const response = await fetch('/.netlify/functions/sendTelegram', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, phone, subject, message })
+      });
+  
+      if (response.ok) {
+        alert("Mensagem enviada com sucesso no Telegram! 🚀");
+        e.target.reset();
+      } else {
+        alert("Erro ao enviar sua mensagem 😓");
+      }
     });
-}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.menu-hamburguer');
