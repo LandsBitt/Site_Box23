@@ -40,7 +40,7 @@ export async function handler(event, context) {
     } catch (err) {
       return {
         statusCode: 500,
-        body: JSON.stringify({ message: 'Erro ao enviar para o Telegram.', error: err.message })
+        body: JSON.stringify({ message: 'Erro ao enviar.', error: err.message })
       };
     }
   }
