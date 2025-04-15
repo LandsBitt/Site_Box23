@@ -35,7 +35,7 @@ export async function handler(event, context) {
   
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: 'Mensagem enviada para o Telegram!' })
+        body: JSON.stringify({ message: 'Mensagem enviada com sucesso!' })
       };
     } catch (err) {
       return {
