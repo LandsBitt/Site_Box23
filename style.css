@@ -7,6 +7,16 @@
   
   /* Estilização da nav */
 /* Estilização geral da barra de navegação */
+
+:root{
+    --main-color: #F95004;
+    --text-color: #EAF2E3;
+    --bg-color-01: #121212; 
+    --bg-color-02: #11151C;
+    --color-00: #6A706E;
+
+
+}
 nav {
     box-shadow: 0 0 15px rgba(249, 80, 4, 0.5); /* Brilho laranja */
     backdrop-filter: blur(5px); /* Efeito de vidro fosco */
@@ -42,7 +52,7 @@ nav {
 }
 
 .nav-links a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 600;
@@ -53,7 +63,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: #f95004;
+    color: var(--main-color);
 }
 
 .nav-links a::after {
@@ -63,7 +73,7 @@ nav {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #f95004;
+    background-color: var(--main-color);
     transition: width 0.3s ease;
 }
 
@@ -120,7 +130,7 @@ nav {
 }
 
 .mobile-links a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 1.5rem;
     text-transform: uppercase;
@@ -131,7 +141,7 @@ nav {
 }
 
 .mobile-links a:hover {
-    color: #f95004;
+    color: var(--main-color);
 }
 
 /* Animação Hamburguer */
@@ -186,7 +196,7 @@ nav {
 
 /* Estilo básico dos links */
 #links a {
-    color: white; /* Cor do texto */
+    color: var(--text-color); /* Cor do texto */
     text-decoration: none; /* Remove sublinhado */
     text-transform: uppercase; /* Texto em maiúsculas */
     font-weight: 600; /* Peso da fonte */
@@ -198,7 +208,7 @@ nav {
 
 /* Efeito hover nos links */
 #links a:hover {
-    color: #f95004; /* Cor laranja no hover */
+    color: var(--main-color); /* Cor laranja no hover */
 }
 
 /* Efeito de sublinhado animado */
@@ -209,7 +219,7 @@ nav {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: #f95004; /* Cor laranja */
+    background-color: var(--main-color); /* Cor laranja */
     transition: width 0.3s ease; /* Animação de largura */
 }
 
@@ -219,7 +229,7 @@ nav {
 
 /* Efeito ativo (página atual) */
 #links a.active {
-    color: #f95004; /* Cor laranja */
+    color: var(--main-color); /* Cor laranja */
 }
 
 #links a.active::after {
@@ -250,7 +260,7 @@ nav {
     display: block;
     width: 100px;
     height: 4px;
-    background-color: #f95004;
+    background-color: var(--main-color);
     margin-top: 1.5rem;
 }
 
@@ -279,7 +289,7 @@ nav {
                 url('imagens/2024-07-16.jpg') no-repeat center center;
     background-size: cover;
     padding: 4rem 10%;
-    color: white;
+    color: var(--text-color);
     position: relative;
     overflow: hidden;
 }
@@ -289,13 +299,13 @@ nav {
     min-height: 80vh; /* Altura mínima da viewport */
 }
 #resumo h1 span {
-    color: #f95004;
+    color: var(--main-color);
 }
 
 
 /* Estilo da seção de serviços */
 .serviços {
-    background-color: #121212;
+    background-color: var(--bg-color-01);
     padding: 6rem 5%;
     position: relative;
     overflow: hidden;
@@ -320,11 +330,11 @@ nav {
     margin-bottom: 3rem;
     position: relative;
     z-index: 1;
-    color: white;
+    color: var(--text-color);
 }
 
 .serviços h2 span {
-    color: #f95004;
+    color: var(--main-color);
 }
 
 /* Container dos serviços */
@@ -350,7 +360,7 @@ nav {
 .serviços-box:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(249, 80, 4, 0.3);
-    border-color: #f95004;
+    border-color: var(--main-color);
 }
 
 .serviços-box img {
@@ -388,14 +398,14 @@ nav {
 .serviços-layer h4 {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
-    color: white;
+    color: var(--text-color);
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .serviços-layer p {
     font-size: 1rem;
     margin-bottom: 1rem;
-    color: white;
+    color: var(--text-color);
 }
 
 .serviços-layer a {
@@ -411,13 +421,13 @@ nav {
 }
 
 .serviços-layer a:hover {
-    background: white;
+    background: var(--text-color);
     transform: scale(1.1);
 }
 
 .serviços-layer a i {
     font-size: 1.5rem;
-    color: white;
+    color: var(--text-color);
 }
 
 .serviços-layer a:hover i {
@@ -481,11 +491,11 @@ nav {
     margin-bottom: 3rem;
     position: relative;
     z-index: 1;
-    color: white;
+    color: var(--text-color);
 }
 
 .contato h2 span {
-    color: #f95004;
+    color: var(--main-color);
 }
 
 /* Container principal */
@@ -514,7 +524,7 @@ nav {
 
 .info-box i {
     font-size: 1.5rem;
-    color: #f95004;
+    color: var(--main-color);
     margin-right: 1rem;
     margin-top: 0.3rem;
 }
@@ -522,7 +532,7 @@ nav {
 .info-text h3 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
-    color: #f95004;
+    color: var(--main-color);
 }
 
 .info-text p {
@@ -536,7 +546,7 @@ nav {
 }
 
 .horario .dia span {
-    color: white;
+    color: var(--text-color);
     font-weight: 600;
     display: inline-block;
     width: 120px;
@@ -584,7 +594,7 @@ nav {
     background: transparent;
     border: 1px solid rgba(249, 80, 4, 0.5);
     border-radius: 5px;
-    color: white;
+    color: var(--text-color);
     font-size: 1rem;
     transition: all 0.3s ease;
 }
@@ -610,19 +620,19 @@ nav {
     top: -20px;
     left: 0;
     font-size: 0.8rem;
-    color: #f95004;
+    color: var(--main-color);
 }
 
 .input-box input:focus,
 .input-box textarea:focus {
-    border-color: #f95004;
+    border-color: var(--main-color);
     outline: none;
     box-shadow: 0 0 10px rgba(249, 80, 4, 0.3);
 }
 
 .btn {
-    background: #f95004;
-    color: white;
+    background: var(--main-color);
+    color: var(--text-color);
     border: none;
     padding: 12px 30px;
     border-radius: 50px;
@@ -704,8 +714,8 @@ nav {
     background-color: #121212;
     padding: 2rem 5%;
     position: relative;
-    color: white;
-    border-top: 2px solid #f95004;
+    color: var(--text-color);
+    border-top: 2px solid var(--main-color);
 }
 
 .footer-container {
@@ -733,7 +743,7 @@ nav {
 .footer-links h3 {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
-    color: #f95004;
+    color: var(--main-color);
 }
 
 .footer-links ul {
@@ -746,21 +756,21 @@ nav {
 }
 
 .footer-links a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-    color: #f95004;
+    color: var(--main-color);
 }
 
 /* Contato Rápido no Footer */
 .footer-contact h3 {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
-    color: #f95004;
+    color: var(--main-color);
 }
 
 .footer-contact p {
@@ -772,7 +782,7 @@ nav {
 }
 
 .footer-contact i {
-    color: #f95004;
+    color: var(--main-color);
     margin-right: 0.6rem;
     font-size: 1rem;
 }
@@ -781,7 +791,7 @@ nav {
 .footer-social h3 {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
-    color: #f95004;
+    color: var(--main-color);
 }
 
 .social-icons {
@@ -803,14 +813,14 @@ nav {
 }
 
 .social-icons a:hover {
-    background: #f95004;
+    background: var(--main-color);
     transform: scale(1.1);
     text-decoration: none;
 }
 
 .social-icons i {
     font-size: 1.2rem;
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
 }
 
@@ -831,7 +841,7 @@ nav {
 }
 
 .footer-bottom span {
-    color: #f95004;
+    color: var(--main-color);
     font-weight: 600;
 }
 
@@ -901,7 +911,7 @@ body {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    color: white;
+    color: var(--text-color);
     margin: 0;
     padding: 0;
 
