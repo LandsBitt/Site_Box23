@@ -693,6 +693,12 @@ nav {
    
         
 }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
 /* Estilo do Footer */
 .footer {
     background-color: #121212;
@@ -889,12 +895,16 @@ html{
 
 body {
     background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     color: white;
+    margin: 0;
+    padding: 0;
+
 }
 body.menu-open {
     overflow: hidden; /* trava o scroll quando o menu tá aberto */
