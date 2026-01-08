@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: linear-gradient(135deg, #050505 0%, #121212 55%, #080808 100%);
+    color: #eaf2e3;
+    font-family: "Poppins", ui-sans-serif, system-ui;
+    min-height: 100vh;
+  }
+
+  a {
+    color: inherit;
+  }
+}
