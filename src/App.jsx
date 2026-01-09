@@ -10,7 +10,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen text-mist">
+    <div className="min-h-screen max-w-full overflow-x-hidden text-mist">
       <Header
         isOpen={isMenuOpen}
         onToggle={() => setIsMenuOpen((prev) => !prev)}

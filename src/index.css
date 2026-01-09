@@ -5,13 +5,39 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+    background-color: #050505;
+    overscroll-behavior-y: none;
   }
 
   body {
     background: linear-gradient(135deg, #050505 0%, #121212 55%, #080808 100%);
+    background-color: #050505;
     color: #eaf2e3;
     font-family: "Poppins", ui-sans-serif, system-ui;
     min-height: 100vh;
+    overflow-x: hidden;
+    max-width: 100%;
+    overscroll-behavior-y: none;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: -30vh;
+    left: 50%;
+    width: 140%;
+    height: 60vh;
+    transform: translateX(-50%);
+    pointer-events: none;
+    background: radial-gradient(
+      circle at top,
+      rgba(249, 80, 4, 0.25),
+      rgba(5, 5, 5, 0) 65%
+    );
+    opacity: 0.7;
+    z-index: 0;
   }
 
   a {

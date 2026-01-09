@@ -41,7 +41,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contato" className="relative bg-charcoal px-6 py-24 md:py-28">
+    <section
+      id="contato"
+      className="relative overflow-hidden bg-charcoal px-6 py-24 md:py-28"
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(249,80,4,0.12)_0%,transparent_45%)]" />
       <div className="relative mx-auto max-w-6xl">
         <h2 className="text-center text-3xl font-semibold text-mist md:text-4xl">

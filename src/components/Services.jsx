@@ -51,7 +51,10 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="servicos" className="relative bg-graphite px-6 py-24 md:py-28">
+    <section
+      id="servicos"
+      className="relative overflow-hidden bg-graphite px-6 py-24 md:py-28"
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(249,80,4,0.15)_0%,transparent_45%)]" />
       <div className="relative mx-auto max-w-6xl">
         <h2 className="text-center text-3xl font-semibold text-mist md:text-4xl">
