@@ -41,7 +41,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contato" className="relative bg-charcoal px-6 py-20">
+    <section id="contato" className="relative bg-charcoal px-6 py-24 md:py-28">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(249,80,4,0.12)_0%,transparent_45%)]" />
       <div className="relative mx-auto max-w-6xl">
         <h2 className="text-center text-3xl font-semibold text-mist md:text-4xl">
@@ -50,25 +50,31 @@ export default function Contact() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_1.3fr_1.1fr]">
           <div className="rounded-2xl border border-ember/30 bg-slate/80 p-6 shadow-ember">
-            <div className="space-y-6 text-sm text-mist/80">
+            <div className="space-y-6 text-sm text-ash">
               <div className="flex gap-4">
-                <i className="fas fa-map-marker-alt text-xl text-ember" />
+                <i
+                  className="fas fa-map-marker-alt text-xl text-ember"
+                  aria-hidden="true"
+                />
                 <div>
                   <h3 className="text-base font-semibold text-ember">
                     Endereço
                   </h3>
                   <p>
-                    Av. Amélia Prata Balarin, 105
+                    R. Jacyrema de Castro Giulianetti Almeida, N° 11
                     <br />
-                    Parque das Palmeiras
+                    Vila São Paulo
                     <br />
-                    Pindamonhangaba - SP, 12404-241
+                    Pindamonhangaba - SP, 12405-588
                   </p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <i className="fas fa-phone-alt text-xl text-ember" />
+                <i
+                  className="fas fa-phone-alt text-xl text-ember"
+                  aria-hidden="true"
+                />
                 <div>
                   <h3 className="text-base font-semibold text-ember">Telefone</h3>
                   <p>(12) 99173-0255</p>
@@ -76,7 +82,7 @@ export default function Contact() {
               </div>
 
               <div className="flex gap-4">
-                <i className="fas fa-clock text-xl text-ember" />
+                <i className="fas fa-clock text-xl text-ember" aria-hidden="true" />
                 <div>
                   <h3 className="text-base font-semibold text-ember">
                     Horário de Funcionamento
@@ -103,7 +109,7 @@ export default function Contact() {
           <div className="min-h-[280px] overflow-hidden rounded-2xl border border-white/10">
             <iframe
               title="Mapa Box23"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.123456789012!2d-45.4302789!3d-22.9190197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ccef53bde58fbd%3A0x706f705214b4968a!2sOficina%20Box23!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
+              src="https://www.google.com/maps?q=R.%20Jacyrema%20de%20Castro%20Giulianetti%20Almeida%2C%2011%20-%20Vila%20S%C3%A3o%20Paulo%2C%20Pindamonhangaba%20-%20SP%2C%2012405-588&output=embed"
               className="h-full w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -113,64 +119,60 @@ export default function Contact() {
           <div className="rounded-2xl border border-ember/30 bg-slate/80 p-6 shadow-ember">
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid gap-4 md:grid-cols-2">
-                <label className="relative block">
+                <label className="block text-sm text-ash">
+                  Nome completo
                   <input
                     type="text"
                     name="name"
                     required
-                    placeholder=" "
-                    className="peer w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
+                    autoComplete="name"
+                    className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
+                    aria-required="true"
                   />
-                  <span className="absolute left-4 top-3 text-xs text-mist/60 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-ember">
-                    Nome completo
-                  </span>
                 </label>
 
-                <label className="relative block">
+                <label className="block text-sm text-ash">
+                  E-mail
                   <input
                     type="email"
                     name="email"
                     required
-                    placeholder=" "
-                    className="peer w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
+                    autoComplete="email"
+                    className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
+                    aria-required="true"
                   />
-                  <span className="absolute left-4 top-3 text-xs text-mist/60 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-ember">
-                    E-mail
-                  </span>
                 </label>
               </div>
 
-              <label className="relative block">
+              <label className="block text-sm text-ash">
+                Telefone (opcional)
                 <input
                   type="tel"
                   name="phone"
-                  placeholder=" "
-                  className="peer w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
                 />
-                <span className="absolute left-4 top-3 text-xs text-mist/60 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-ember">
-                  Telefone
-                </span>
               </label>
 
-              <label className="relative block">
+              <label className="block text-sm text-ash">
+                Descreva brevemente o serviço necessário
                 <textarea
                   name="message"
                   required
-                  placeholder=" "
                   rows="4"
-                  className="peer w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
+                  className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
+                  aria-required="true"
                 />
-                <span className="absolute left-4 top-3 text-xs text-mist/60 transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:top-3 peer-focus:-top-2 peer-focus:text-xs peer-focus:text-ember">
-                  Descreva brevemente o serviço necessário
-                </span>
               </label>
 
               <button
                 type="submit"
                 className="flex w-full items-center justify-center gap-2 rounded-full bg-ember px-6 py-3 text-sm font-semibold uppercase tracking-widest text-white transition hover:-translate-y-0.5 hover:shadow-ember disabled:cursor-not-allowed disabled:opacity-70"
                 disabled={isSending}
+                aria-label="Enviar mensagem pelo formulário"
               >
-                <i className="fas fa-paper-plane" />
+                <i className="fas fa-paper-plane" aria-hidden="true" />
                 {isSending ? "Enviando..." : "Enviar mensagem"}
               </button>
 

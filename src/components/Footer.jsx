@@ -39,7 +39,7 @@ export default function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-ember">
             Navegação
           </h3>
-          <ul className="mt-4 space-y-2 text-sm text-mist/80">
+          <ul className="mt-4 space-y-2 text-sm text-ash">
             {footerLinks.map((link) => (
               <li key={link.href}>
                 <a className="transition hover:text-ember" href={link.href}>
@@ -54,14 +54,14 @@ export default function Footer() {
           <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-ember">
             Contato rápido
           </h3>
-          <div className="mt-4 space-y-2 text-sm text-mist/80">
+          <div className="mt-4 space-y-2 text-sm text-ash">
             <p className="flex items-center gap-2">
-              <i className="fas fa-phone-alt text-ember" />
+              <i className="fas fa-phone-alt text-ember" aria-hidden="true" />
               (12) 99173-0255
             </p>
             <p className="flex items-center gap-2">
-              <i className="fas fa-map-marker-alt text-ember" />
-              Av. Amélia Prata Balarin, 105
+              <i className="fas fa-map-marker-alt text-ember" aria-hidden="true" />
+              R. Jacyrema de Castro Giulianetti Almeida, N° 11
             </p>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 max-w-6xl border-t border-white/10 pt-6 text-center text-xs text-mist/60">
+      <div className="mx-auto mt-10 max-w-6xl border-t border-white/10 pt-6 text-center text-xs text-ash/70">
         <p>© 2025 Box23. Todos os direitos reservados.</p>
         <p>
           Desenvolvido por <span className="text-ember">Roland Bittencourt</span>

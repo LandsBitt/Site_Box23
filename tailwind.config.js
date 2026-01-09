@@ -9,6 +9,8 @@ export default {
         graphite: "#121212",
         slate: "#1A1A1A",
         mist: "#EAF2E3",
+        cloud: "#F5F5F2",
+        ash: "#C8D1C5",
       },
       fontFamily: {
         sans: ["Poppins", "ui-sans-serif", "system-ui"],

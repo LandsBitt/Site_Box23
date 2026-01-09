@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const navLinks = [
   { href: "#resumo", label: "Empresa" },
@@ -6,15 +6,11 @@ const navLinks = [
   { href: "#contato", label: "Contato" },
 ];
 
-export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function Header({ isOpen, onToggle, onClose }) {
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", isOpen);
     return () => document.body.classList.remove("overflow-hidden");
   }, [isOpen]);
-
-  const handleLinkClick = () => setIsOpen(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-ember/30 bg-black/90 backdrop-blur">
@@ -43,10 +39,10 @@ export default function Header() {
         <button
           type="button"
           className="flex flex-col gap-1.5 md:hidden"
-          aria-label="Abrir menu"
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
-          onClick={() => setIsOpen((prev) => !prev)}
+          onClick={onToggle}
         >
           <span
             className={`h-0.5 w-7 rounded bg-mist transition ${
@@ -78,7 +74,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               className="text-lg font-semibold uppercase tracking-[0.3em] text-mist/90 hover:text-ember"
-              onClick={handleLinkClick}
+              onClick={onClose}
             >
               {link.label}
             </a>
@@ -91,7 +87,7 @@ export default function Header() {
           type="button"
           className="fixed inset-0 z-30 bg-black/50 md:hidden"
           aria-label="Fechar menu"
-          onClick={() => setIsOpen(false)}
+          onClick={onClose}
         />
       )}
     </header>
