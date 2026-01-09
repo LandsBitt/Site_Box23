@@ -3,6 +3,15 @@ import { useState } from "react";
 export default function Contact() {
   const [isSending, setIsSending] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const address =
+    "R. Jacyrema de Castro Giulianetti Almeida, N° 11 - Vila São Paulo, Pindamonhangaba - SP, 12405-588";
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    address,
+  )}`;
+  const mapsUrl = "https://maps.app.goo.gl/R6Ejpbf7jxye2NqMA";
+  const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+    address,
+  )}&output=embed`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -70,6 +79,26 @@ export default function Contact() {
                     <br />
                     Pindamonhangaba - SP, 12405-588
                   </p>
+                  <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                    <a
+                      href={directionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-full bg-ember px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition hover:-translate-y-0.5 hover:shadow-ember focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember"
+                      aria-label="Obter rota no Google Maps"
+                    >
+                      Obter rota
+                    </a>
+                    <a
+                      href={mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-full border border-ember/60 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-ember transition hover:bg-ember hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember"
+                      aria-label="Ver no Google Maps"
+                    >
+                      Ver no Google Maps
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -112,7 +141,7 @@ export default function Contact() {
           <div className="min-h-[280px] overflow-hidden rounded-2xl border border-white/10">
             <iframe
               title="Mapa Box23"
-              src="https://www.google.com/maps?q=R.%20Jacyrema%20de%20Castro%20Giulianetti%20Almeida%2C%2011%20-%20Vila%20S%C3%A3o%20Paulo%2C%20Pindamonhangaba%20-%20SP%2C%2012405-588&output=embed"
+              src={mapEmbedSrc}
               className="h-full w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

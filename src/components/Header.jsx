@@ -1,39 +1,76 @@
 import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { href: "#resumo", label: "Empresa" },
-  { href: "#servicos", label: "Serviços" },
-  { href: "#contato", label: "Contato" },
+  { href: "#resumo", label: "Empresa", key: "empresa" },
+  { href: "#servicos", label: "Serviços", key: "servicos" },
+  { href: "#contato", label: "Contato", key: "contato" },
 ];
 
 export default function Header({ isOpen, onToggle, onClose }) {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", isOpen);
     return () => document.body.classList.remove("overflow-hidden");
   }, [isOpen]);
 
+  const resolveLink = (link) => {
+    if (link.key === "servicos") {
+      return isHome ? { type: "anchor", href: link.href } : { type: "route", to: "/servicos" };
+    }
+
+    if (isHome) {
+      return { type: "anchor", href: link.href };
+    }
+
+    return { type: "route", to: `/${link.href}` };
+  };
+
+  const handleLinkClick = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-ember/30 bg-black/90 backdrop-blur">
       <nav className="mx-auto flex h-[88px] max-w-6xl items-center justify-between px-6">
-        <a href="#resumo" className="flex items-center gap-2">
+        <Link to="/#resumo" className="flex items-center gap-2">
           <img
             src="/imagens/Logo.png"
             alt="Box23 Logo"
             className="h-12 w-auto transition-transform duration-300 hover:scale-[1.02]"
             loading="lazy"
           />
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-semibold uppercase tracking-[0.2em] text-mist/90 transition hover:text-ember"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const resolved = resolveLink(link);
+            if (resolved.type === "anchor") {
+              return (
+                <a
+                  key={link.key}
+                  href={resolved.href}
+                  className="text-sm font-semibold uppercase tracking-[0.2em] text-mist/90 transition hover:text-ember"
+                >
+                  {link.label}
+                </a>
+              );
+            }
+
+            return (
+              <Link
+                key={link.key}
+                to={resolved.to}
+                className="text-sm font-semibold uppercase tracking-[0.2em] text-mist/90 transition hover:text-ember"
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         <button
@@ -69,16 +106,32 @@ export default function Header({ isOpen, onToggle, onClose }) {
         }`}
       >
         <div className="mt-20 flex flex-col gap-6 text-center">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-lg font-semibold uppercase tracking-[0.3em] text-mist/90 hover:text-ember"
-              onClick={onClose}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const resolved = resolveLink(link);
+            if (resolved.type === "anchor") {
+              return (
+                <a
+                  key={link.key}
+                  href={resolved.href}
+                  className="text-lg font-semibold uppercase tracking-[0.3em] text-mist/90 hover:text-ember"
+                  onClick={handleLinkClick}
+                >
+                  {link.label}
+                </a>
+              );
+            }
+
+            return (
+              <Link
+                key={link.key}
+                to={resolved.to}
+                className="text-lg font-semibold uppercase tracking-[0.3em] text-mist/90 hover:text-ember"
+                onClick={handleLinkClick}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
 

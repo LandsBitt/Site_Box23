@@ -59,10 +59,14 @@ export default function Footer() {
               <i className="fas fa-phone-alt text-ember" aria-hidden="true" />
               (12) 99173-0255
             </p>
-            <p className="flex items-center gap-2">
+            <div className="flex items-start gap-2">
               <i className="fas fa-map-marker-alt text-ember" aria-hidden="true" />
-              R. Jacyrema de Castro Giulianetti Almeida, N° 11
-            </p>
+              <span>
+                R. Jacyrema de Castro Giulianetti Almeida, N° 11 - Vila São Paulo
+                <br />
+                Pindamonhangaba - SP, 12405-588
+              </span>
+            </div>
           </div>
         </div>
 

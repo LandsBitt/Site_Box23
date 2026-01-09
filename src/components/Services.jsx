@@ -1,58 +1,30 @@
-const services = [
-  {
-    title: "Diagnóstico via osciloscópio e scanner",
-    description:
-      "Leitura precisa de falhas e parâmetros para soluções rápidas e seguras.",
-    image: "/imagens/scanner.jpg",
-    icon: "fas fa-microchip",
-    iconLabel: "Ícone de diagnóstico eletrônico",
-  },
-  {
-    title: "Serviços elétricos",
-    description:
-      "Reparo de chicotes, sensores e sistemas elétricos com garantia.",
-    image: "/imagens/eletrico.jpg",
-    icon: "fas fa-bolt",
-    iconLabel: "Ícone de energia elétrica",
-  },
-  {
-    title: "Revisão preventiva",
-    description:
-      "Checklist completo para viagens e uso diário com tranquilidade.",
-    image: "/imagens/revisao.jpg",
-    icon: "fas fa-clipboard-check",
-    iconLabel: "Ícone de checklist",
-  },
-  {
-    title: "Troca de óleo",
-    description:
-      "Lubrificantes certos para prolongar a vida útil do motor.",
-    image: "/imagens/oleo.jpg",
-    icon: "fas fa-oil-can",
-    iconLabel: "Ícone de óleo automotivo",
-  },
-  {
-    title: "Manutenção de freios",
-    description:
-      "Pastilhas, discos e fluido revisados para máxima segurança.",
-    image: "/imagens/freio.jpg",
-    icon: "fas fa-car-crash",
-    iconLabel: "Ícone de freios",
-  },
-  {
-    title: "Suspensão e amortecedores",
-    description:
-      "Conforto e estabilidade com inspeção completa do conjunto.",
-    image: "/imagens/suspensao.jpg",
-    icon: "fas fa-car-side",
-    iconLabel: "Ícone de suspensão",
-  },
-];
+import { Link } from "react-router-dom";
+import { featuredServices, serviceCategories } from "../data/servicesData.js";
 
-export default function Services() {
+const allServices = serviceCategories.flatMap((category) =>
+  category.items.map((item) => ({
+    ...item,
+    categoryId: category.id,
+    categoryTitle: category.title,
+  })),
+);
+
+const servicesById = allServices.reduce((accumulator, item) => {
+  accumulator[item.id] = item;
+  return accumulator;
+}, {});
+
+export default function Services({ variant = "featured" }) {
+  const isFeatured = variant === "featured";
+  const services = isFeatured
+    ? featuredServices
+        .map((id) => servicesById[id])
+        .filter(Boolean)
+    : allServices;
+
   return (
     <section
-      id="servicos"
+      id={isFeatured ? "servicos" : undefined}
       className="relative overflow-hidden bg-graphite px-6 py-24 md:py-28"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(249,80,4,0.15)_0%,transparent_45%)]" />
@@ -64,31 +36,37 @@ export default function Services() {
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
             <article
-              key={service.title}
-              className="group relative h-72 overflow-hidden rounded-2xl border border-ember/30 shadow-ember transition hover:-translate-y-1"
+              key={service.id}
+              className="group relative rounded-2xl border border-ember/30 bg-slate/70 p-6 shadow-ember transition hover:-translate-y-1"
             >
-              <img
-                src={service.image}
-                alt={service.title}
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-110 group-hover:brightness-75"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 text-ember">
-                  <i className={service.icon} aria-hidden="true" />
-                  <span className="sr-only">{service.iconLabel}</span>
-                </div>
-                <h3 className="text-xl font-semibold text-white">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-sm text-ash">
-                  {service.description}
-                </p>
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/40 text-ember">
+                <i className={service.icon} aria-hidden="true" />
+                <span className="sr-only">{service.title}</span>
               </div>
+              <h3 className="text-xl font-semibold text-white">
+                {service.title}
+              </h3>
+              <p className="mt-2 text-sm text-ash">{service.description}</p>
+              {!isFeatured && service.categoryTitle && (
+                <p className="mt-4 text-xs uppercase tracking-[0.25em] text-ember/80">
+                  {service.categoryTitle}
+                </p>
+              )}
             </article>
           ))}
         </div>
+
+        {isFeatured && (
+          <div className="mt-10 flex justify-center">
+            <Link
+              to="/servicos"
+              className="inline-flex items-center justify-center rounded-full border border-ember/60 px-6 py-3 text-sm font-semibold uppercase tracking-widest text-ember transition hover:bg-ember hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember"
+              aria-label="Ver todos os serviços"
+            >
+              Ver todos os serviços
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
