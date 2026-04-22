@@ -30,7 +30,7 @@ export default function Hero() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('/imagens/2024-07-16.jpg')",
+            backgroundImage: "url('/imagens/2024-07-16-enhanced.webp')",
             filter: "contrast(1.1) saturate(0.85) brightness(0.85)",
           }}
         />
