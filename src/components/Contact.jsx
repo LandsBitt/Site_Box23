@@ -1,21 +1,56 @@
 import { useState } from "react";
+import { Reveal } from "./ui/Reveal.jsx";
+import Magnetic from "./ui/Magnetic.jsx";
+
+const ADDRESS =
+  "R. Jacyrema de Castro Giulianetti Almeida, Nº 11, Vila São Paulo, Pindamonhangaba - SP, 12405-588";
+
+function Field({ label, name, type = "text", required, autoComplete, textarea }) {
+  const baseClass =
+    "peer w-full border-0 border-b border-white/15 bg-transparent px-0 py-3 text-base text-bone outline-none transition-colors focus:border-ember placeholder:text-transparent";
+  return (
+    <label className="group relative block">
+      {textarea ? (
+        <textarea
+          name={name}
+          required={required}
+          autoComplete={autoComplete}
+          rows={4}
+          placeholder={label}
+          className={`${baseClass} resize-none`}
+          aria-required={required ? "true" : undefined}
+        />
+      ) : (
+        <input
+          type={type}
+          name={name}
+          required={required}
+          autoComplete={autoComplete}
+          inputMode={type === "tel" ? "tel" : undefined}
+          placeholder={label}
+          className={baseClass}
+          aria-required={required ? "true" : undefined}
+        />
+      )}
+      <span className="pointer-events-none absolute -top-2.5 left-0 text-[10px] uppercase tracking-widest text-steel-400 transition-colors group-focus-within:text-ember">
+        {label}
+      </span>
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-ember transition-transform duration-500 peer-focus:scale-x-100" />
+    </label>
+  );
+}
 
 export default function Contact() {
   const [isSending, setIsSending] = useState(false);
-  const [feedback, setFeedback] = useState("");
-  const address =
-    "R. Jacyrema de Castro Giulianetti Almeida, N° 11 - Vila São Paulo, Pindamonhangaba - SP, 12405-588";
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-    address,
-  )}`;
+  const [feedback, setFeedback] = useState({ type: "", message: "" });
+
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ADDRESS)}`;
   const mapsUrl = "https://maps.app.goo.gl/R6Ejpbf7jxye2NqMA";
-  const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-    address,
-  )}&output=embed`;
+  const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFeedback("");
+    setFeedback({ type: "", message: "" });
     setIsSending(true);
 
     const formData = new FormData(event.target);
@@ -33,17 +68,17 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-
-      if (!response.ok) {
-        throw new Error("Falha no envio");
-      }
-
-      setFeedback("Mensagem enviada com sucesso. Em breve entraremos em contato.");
+      if (!response.ok) throw new Error("Falha no envio");
+      setFeedback({
+        type: "success",
+        message: "Mensagem enviada. Em breve entraremos em contato.",
+      });
       event.target.reset();
     } catch (error) {
-      setFeedback(
-        "Erro ao enviar sua mensagem. Tente novamente ou use o WhatsApp.",
-      );
+      setFeedback({
+        type: "error",
+        message: "Erro ao enviar. Tente novamente ou use o WhatsApp.",
+      });
     } finally {
       setIsSending(false);
     }
@@ -52,169 +87,141 @@ export default function Contact() {
   return (
     <section
       id="contato"
-      className="relative overflow-hidden bg-charcoal px-6 py-24 md:py-28"
+      className="relative overflow-hidden bg-ink-950 py-32 md:py-40"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(249,80,4,0.12)_0%,transparent_45%)]" />
-      <div className="relative mx-auto max-w-6xl">
-        <h2 className="text-center text-3xl font-semibold text-mist md:text-4xl">
-          Fale <span className="text-ember">Conosco</span>
-        </h2>
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(249,80,4,0.12),transparent_55%)]" />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_1.3fr_1.1fr]">
-          <div className="rounded-2xl border border-ember/30 bg-slate/80 p-6 shadow-ember">
-            <div className="space-y-6 text-sm text-ash">
-              <div className="flex gap-4">
-                <i
-                  className="fas fa-map-marker-alt text-xl text-ember"
-                  aria-hidden="true"
-                />
+      <div className="container-page relative">
+        <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr]">
+          {/* Left column: heading + info */}
+          <div>
+            <Reveal>
+              <p className="eyebrow mb-6">Fale conosco</p>
+              <h2 className="font-display text-display-md font-semibold text-bone text-balance">
+                Pronto para uma <span className="text-ember italic">conversa direta</span>?
+              </h2>
+              <p className="mt-6 max-w-md text-base text-steel-300">
+                Mande sua dúvida ou descreva o problema do veículo. Respondemos
+                rapidamente — geralmente em poucos minutos durante o expediente.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.15} className="mt-12 space-y-8">
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-steel-400">Endereço</p>
+                <p className="mt-2 text-base text-bone">
+                  R. Jacyrema de Castro Giulianetti Almeida, Nº 11
+                  <br />
+                  Vila São Paulo · Pindamonhangaba SP
+                </p>
+                <div className="mt-3 flex flex-wrap gap-3">
+                  <a
+                    href={directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs uppercase tracking-widest text-ember underline-offset-4 transition hover:underline"
+                  >
+                    → Obter rota
+                  </a>
+                  <a
+                    href={mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs uppercase tracking-widest text-steel-300 underline-offset-4 transition hover:text-ember hover:underline"
+                  >
+                    Abrir no Maps
+                  </a>
+                </div>
+              </div>
+
+              <div className="hairline" />
+
+              <div className="grid gap-8 sm:grid-cols-2">
                 <div>
-                  <h3 className="text-base font-semibold text-ember">
-                    Endereço
-                  </h3>
-                  <p>
-                    R. Jacyrema de Castro Giulianetti Almeida, N° 11
-                    <br />
-                    Vila São Paulo
-                    <br />
-                    Pindamonhangaba - SP, 12405-588
-                  </p>
-                  <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-                    <a
-                      href={directionsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-full bg-ember px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition hover:-translate-y-0.5 hover:shadow-ember focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember"
-                      aria-label="Obter rota no Google Maps"
-                    >
-                      Obter rota
-                    </a>
-                    <a
-                      href={mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-full border border-ember/60 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-ember transition hover:bg-ember hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember"
-                      aria-label="Ver no Google Maps"
-                    >
-                      Ver no Google Maps
-                    </a>
+                  <p className="text-[10px] uppercase tracking-widest text-steel-400">Telefone</p>
+                  <a href="tel:+5512991730255" className="mt-2 block font-display text-2xl text-bone hover:text-ember transition">
+                    (12) 99173-0255
+                  </a>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-steel-400">Horário</p>
+                  <p className="mt-2 text-sm text-bone">Seg–Sex · 8h30–18h</p>
+                  <p className="text-sm text-bone">Sáb · 9h–14h</p>
+                </div>
+              </div>
+
+              <Magnetic strength={0.18} className="inline-block">
+                <a
+                  href="https://wa.me/5512991730255"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary"
+                >
+                  <i className="fab fa-whatsapp text-base" aria-hidden="true" />
+                  Atendimento direto
+                </a>
+              </Magnetic>
+            </Reveal>
+
+            <Reveal delay={0.3} className="mt-12 overflow-hidden rounded-2xl border border-white/[0.08]">
+              <iframe
+                title="Mapa Box23"
+                src={mapEmbedSrc}
+                className="h-64 w-full grayscale-[0.4] contrast-[1.05]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </Reveal>
+          </div>
+
+          {/* Right column: form */}
+          <Reveal delay={0.1}>
+            <div className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-8 md:p-12">
+              <div className="pointer-events-none absolute -top-32 -right-32 h-64 w-64 rounded-full bg-ember/20 blur-3xl" />
+              <div className="relative">
+                <p className="text-[10px] uppercase tracking-widest text-ember/80">
+                  Formulário · 30 segundos
+                </p>
+                <h3 className="mt-4 font-display text-2xl font-semibold text-bone md:text-3xl">
+                  Conte o que você precisa.
+                </h3>
+
+                <form className="mt-10 space-y-8" onSubmit={handleSubmit}>
+                  <div className="grid gap-8 md:grid-cols-2">
+                    <Field label="Nome completo" name="name" required autoComplete="name" />
+                    <Field label="E-mail" name="email" type="email" required autoComplete="email" />
                   </div>
-                </div>
-              </div>
+                  <Field label="Telefone (opcional)" name="phone" type="tel" autoComplete="tel" />
+                  <Field label="Descreva o serviço necessário" name="message" required textarea />
 
-              <div className="flex gap-4">
-                <i
-                  className="fas fa-phone-alt text-xl text-ember"
-                  aria-hidden="true"
-                />
-                <div>
-                  <h3 className="text-base font-semibold text-ember">Telefone</h3>
-                  <p>(12) 99173-0255</p>
-                </div>
-              </div>
+                  <button
+                    type="submit"
+                    disabled={isSending}
+                    className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60"
+                    aria-label="Enviar mensagem"
+                  >
+                    {isSending ? "Enviando..." : "Enviar mensagem"}
+                    {!isSending && (
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" strokeWidth="1.5" />
+                      </svg>
+                    )}
+                  </button>
 
-              <div className="flex gap-4">
-                <i className="fas fa-clock text-xl text-ember" aria-hidden="true" />
-                <div>
-                  <h3 className="text-base font-semibold text-ember">
-                    Horário de Funcionamento
-                  </h3>
-                  <p>
-                    <span className="font-semibold text-mist">
-                      Segunda a Sexta:
-                    </span>{" "}
-                    08:30 - 18:00
-                  </p>
-                  <p>
-                    <span className="font-semibold text-mist">Sábado:</span>{" "}
-                    09:00 - 14:00
-                  </p>
-                  <p>
-                    <span className="font-semibold text-mist">Domingo:</span>{" "}
-                    Fechado
-                  </p>
-                </div>
+                  {feedback.message && (
+                    <p
+                      role="status"
+                      className={`text-sm ${
+                        feedback.type === "success" ? "text-ember" : "text-steel-300"
+                      }`}
+                    >
+                      {feedback.message}
+                    </p>
+                  )}
+                </form>
               </div>
             </div>
-          </div>
-
-          <div className="min-h-[280px] overflow-hidden rounded-2xl border border-white/10">
-            <iframe
-              title="Mapa Box23"
-              src={mapEmbedSrc}
-              className="h-full w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-
-          <div className="rounded-2xl border border-ember/30 bg-slate/80 p-6 shadow-ember">
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="block text-sm text-ash">
-                  Nome completo
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    autoComplete="name"
-                    className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
-                    aria-required="true"
-                  />
-                </label>
-
-                <label className="block text-sm text-ash">
-                  E-mail
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    autoComplete="email"
-                    className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
-                    aria-required="true"
-                  />
-                </label>
-              </div>
-
-              <label className="block text-sm text-ash">
-                Telefone (opcional)
-                <input
-                  type="tel"
-                  name="phone"
-                  inputMode="tel"
-                  autoComplete="tel"
-                  className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
-                />
-              </label>
-
-              <label className="block text-sm text-ash">
-                Descreva brevemente o serviço necessário
-                <textarea
-                  name="message"
-                  required
-                  rows="4"
-                  className="mt-2 w-full rounded-lg border border-ember/40 bg-transparent px-4 py-3 text-sm text-mist outline-none transition focus:border-ember focus:ring-2 focus:ring-ember/30"
-                  aria-required="true"
-                />
-              </label>
-
-              <button
-                type="submit"
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-ember px-6 py-3 text-sm font-semibold uppercase tracking-widest text-white transition hover:-translate-y-0.5 hover:shadow-ember disabled:cursor-not-allowed disabled:opacity-70"
-                disabled={isSending}
-                aria-label="Enviar mensagem pelo formulário"
-              >
-                <i className="fas fa-paper-plane" aria-hidden="true" />
-                {isSending ? "Enviando..." : "Enviar mensagem"}
-              </button>
-
-              {feedback && (
-                <p className="text-sm text-mist/80" role="status">
-                  {feedback}
-                </p>
-              )}
-            </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
